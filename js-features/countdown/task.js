@@ -5,10 +5,16 @@ const countTime  = function(){
         time.textContent --;
     }	else if(time.textContent = '0'){
         alert("Время кончилось!");
+        
+
     }
   }
   
-  setInterval(countTime,1000); 
+  setInterval(countTime,1000);
+  clearInterval(setInterval)
+
+  //setTimeout(() => { clearInterval(setInterval) }, 3000);
+  
   
   //Повышенный уровень сложности #2
   

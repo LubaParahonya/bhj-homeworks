@@ -1,25 +1,16 @@
-const countTime  = function(){
-    const time = document.getElementById("timer");
-  
-    if (time.textContent >= 1){
-        time.textContent --;
-    }	else if(time.textContent = '0'){
-        alert("Время кончилось!");
+const clicker = document.getElementById("clicker");
+const clickerCounter = document.getElementById("clicker__counter");
+const imgCookie = document.getElementById("cookie");
+
+function imgWidht(){
+    imgCookie.width = 300;
+}
+
+
+imgCookie.onclick = function(){
+        clickerCounter.textContent++;
+        imgCookie.width = 200;
+        setTimeout(imgWidht, 200);
+
+
     }
-  }
-  
-  setInterval(countTime,1000); 
-  
-  //Повышенный уровень сложности #2
-  
-  /*const countTime  = function(){
-    const time = document.getElementById("timer");
-  
-    if (time.textContent >= 1){
-        time.textContent --;
-    }	else if(time.textContent = '0'){
-        location.assign("https://netology.ru/");
-    }
-  }
-  
-  setInterval(countTime,1000); */

@@ -5,13 +5,13 @@ const countTime  = function(){
         time.textContent --;
     }	else if(time.textContent = '0'){
         alert("Время кончилось!");
+        clearInterval(interval)
         
 
     }
   }
   
-  setInterval(countTime,1000);
-  clearInterval(setInterval)
+  const interval = setInterval(countTime,1000);
 
   //setTimeout(() => { clearInterval(setInterval) }, 3000);
   

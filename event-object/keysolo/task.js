@@ -17,14 +17,18 @@ class Game {
   }
 
   registerEvents() {
-    /*
-      TODO:
-      Написать обработчик события, который откликается
-      на каждый введённый символ.
-      В случае правильного ввода символа вызываем this.success()
-      При неправильном вводе символа - this.fail();
-      DOM-элемент текущего символа находится в свойстве this.currentSymbol.
-     */
+    //Получить DOM-элемент текущего символа, который необходимо ввести (свойство this.currentSymbol)
+    const symbolCurrent = document.querySelector('.symbol_current')
+    //Получить символ, который был введён с клавиатуры.
+    //Если два символа одинаковые, вызывать метод this.success
+    if(symbolCurrent === document.addEventListener('keyup', function getSymbol(event)
+    {
+      const elementCurrent = event.key
+    })){
+      this.success()
+    }else{
+      this.fail()
+    }
   }
 
   success() {

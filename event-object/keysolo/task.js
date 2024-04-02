@@ -21,14 +21,14 @@ class Game {
     const symbolCurrent = document.querySelector('.symbol_current')
     //Получить символ, который был введён с клавиатуры.
     //Если два символа одинаковые, вызывать метод this.success
-    if(symbolCurrent === document.addEventListener('keyup', function getSymbol(event)
-    {
+    document.addEventListener('keyup', function getSymbol(event){
       const elementCurrent = event.key
-    })){
-      this.success()
-    }else{
-      this.fail()
-    }
+      if(symbolCurrent === event.key){
+        this.success()
+      } else{
+        this.fail()
+      }
+    })
   }
 
   success() {

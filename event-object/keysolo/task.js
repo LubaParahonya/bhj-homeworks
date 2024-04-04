@@ -21,7 +21,7 @@ class Game {
     const symbolCurrent = document.querySelector('.symbol_current')
     //Получить символ, который был введён с клавиатуры.
     //Если два символа одинаковые, вызывать метод this.success
-    document.addEventListener('keyup', function getSymbol(event){
+    document.addEventListener('keyup', event =>{
       const elementCurrent = event.key
       if(symbolCurrent === event.key){
         this.success()

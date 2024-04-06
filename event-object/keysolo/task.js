@@ -17,18 +17,21 @@ class Game {
   }
 
   registerEvents() {
-    //Получить DOM-элемент текущего символа, который необходимо ввести (свойство this.currentSymbol)
-    const symbolCurrent = document.querySelector('.symbol_current')
-    //Получить символ, который был введён с клавиатуры.
-    //Если два символа одинаковые, вызывать метод this.success
-    document.addEventListener('keyup', event =>{
-      const elementCurrent = event.key
-      if(symbolCurrent === event.key){
-        this.success()
+    let current = this
+
+    function symbol(event){
+      let inputedSymbol = String.fromCharCode(event.keyCode)
+      const symbolCurrent = current.currentSymbol.textContent.toUpperCase();
+      if(symbolCurrent === inputedSymbol){
+        current.success()
       } else{
-        this.fail()
+        current.fail()
       }
-    })
+
+    }
+   
+    
+    document.addEventListener('keydown', symbol)
   }
 
   success() {

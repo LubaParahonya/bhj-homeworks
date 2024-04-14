@@ -1,11 +1,32 @@
+const rotatorCase = Array.from(document.querySelectorAll('span.rotator__case'));
+const lengthRotatorCase = rotatorCase.length
 
 
-const rotators = Array.from(document.querySelectorAll('.rotator__case'))
+function isActiveRotator(element) {
+    return element.classList.contains('rotator__case_active');
+};
 
-function changeRotator(){
-rotators.forEach((index, array) => {
-    array[index].classList.add('rotator__case_active');
-    array[index-1].classList.remove('rotator__case_active')
-});
-}
-setInterval(changeRotator, 1000)
+
+function newIndex(index){
+    return (index === lengthRotatorCase -1)? index = 0 : ++index
+
+ }
+
+ function changeClass(rotator){
+    rotator.classList.toggle('rotator__case_active');
+
+ }
+
+
+setInterval(function () {
+        let currentRotator = rotatorCase.findIndex(isActiveRotator);
+        let newRotator = newIndex(currentRotator);
+        changeClass(rotatorCase[currentRotator]);
+        changeClass(rotatorCase[newRotator]);
+
+        
+    }, 1000)
+
+
+
+ 

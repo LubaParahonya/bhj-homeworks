@@ -1,22 +1,31 @@
 const fontSize = Array.from(document.querySelectorAll('.font-size'))
 const book = document.querySelector('.book')
- 
+   
 
-fontSize.forEach(item => item.addEventListener('click', element => {
-    const activFontSize = document.querySelector('.font-size_active');
-    activFontSize.classList.remove('font-size_active');
-    element.classlist.add('font-size_active')
-    if(element.classList.contains('font-size_small') === true){
-        if(book.classList.contains('font-size_big')){
-            book.classList.remove('font-size_big')
+function addClass(indexElement){
+    const activeFont = document.querySelector('.font-size_active')
+    activeFont.classList.remove('font-size_active')
+    fontSize[indexElement].classList.add('font-size_active')
+
+    if(fontSize[indexElement].classList.contains('font-size_small')){
+        if(book.classList.contains('book_fs-big')){
+            book.classList.remove('book_fs-big')
         }
-        book.classList.add('book_fs-small')
-    }if(element.classList.contains('font-size_big') === true){
-        if(book.classList.contains('font-size_small')){
-            book.classList.remove('font-size_small')
-        }
-        book.classList.add('book_fs-big')
+      book.classList.add('book_fs-small')
+    }if(fontSize[indexElement].classList.contains('font-size_big')){
+        if(book.classList.contains('book_fs-small')){
+        book.classList.remove('book_fs-small')
     }
-   }
-    )
-     )
+       book.classList.add('book_fs-big')
+      }
+
+
+}
+
+fontSize.forEach(item => item.addEventListener('click', function(){
+    event.preventDefault()
+    indexElement = fontSize.indexOf(item)
+    addClass(indexElement)
+
+})) 
+

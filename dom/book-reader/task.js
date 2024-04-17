@@ -12,11 +12,18 @@ function addClass(indexElement){
             book.classList.remove('book_fs-big')
         }
       book.classList.add('book_fs-small')
-    }if(fontSize[indexElement].classList.contains('font-size_big')){
+    }else if(fontSize[indexElement].classList.contains('font-size_big')){
         if(book.classList.contains('book_fs-small')){
         book.classList.remove('book_fs-small')
     }
        book.classList.add('book_fs-big')
+      }else{
+        if(book.classList.contains('book_fs-small')){
+        book.classList.remove('book_fs-small')
+    }if(book.classList.contains('book_fs-big')){
+        book.classList.remove('book_fs-big')
+    }
+        
       }
 
 

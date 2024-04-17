@@ -13,7 +13,6 @@ const cartProducts = document.querySelector('.cart__products')
 //кнопка добавления в корзину
 const productAdd = Array.from(document.querySelectorAll('.product__add'))
 
-
 function minusQuantity (indexProduct){
     if(indexProduct >= 0){
     if(productQuantityValue[indexProduct].textContent > 0){
@@ -66,14 +65,20 @@ function copyProduct(indexProduct){
 
 }
 
+
 productAdd.forEach(el => el.addEventListener('click', function(){
     event.preventDefault()
-    //const childe = cartProducts.childNodes
-    /*if(childe.indexOf(el)){
-        index = childe.indexOf(el)
-        childe[index].textContent = productQuantityValue[indexProduct].textContent
-    }else{*/
+    //id добавленного товара
+    const addProducts = Array.from(document.querySelectorAll('.cart__product'))
+    // кол-во добавленного товара
+    const cartProductCount = Array.from(document.querySelectorAll('.cart__product-count'))
     indexProduct = productAdd.indexOf(el)
+    const arrId = []
+    addProducts.forEach(elementId => arrId.push(elementId.dataset.id))
+    
+    /*if(arrId.includes(indexProduct)){
+        cartProductCount[indexProduct].textContent += 
+    }*/
+    
     copyProduct(indexProduct)}
-//}
 ))

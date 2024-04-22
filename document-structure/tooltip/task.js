@@ -5,7 +5,7 @@ function toolTipActiv(indexElement){
    const tooltip = document.createElement('div')
    tooltip.textContent = 'Проверка!'
    tooltip.style = 'left: 0; top: 0'
-   titleTooltip[indexElement].insertAdjacentHTML('afterEnd', tooltip )
+   titleTooltip[indexElement].insertAdjacentElement('afterEnd', tooltip )
    tooltip.classList.add('tooltip_active')
 
 

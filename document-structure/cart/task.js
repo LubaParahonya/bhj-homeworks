@@ -1,3 +1,4 @@
+
 // кнопка уменьшения
 const minus = Array.from(document.querySelectorAll('.product__quantity-control_dec'))
 //кнопка увеличения
@@ -13,15 +14,17 @@ const cartProducts = document.querySelector('.cart__products')
 //кнопка добавления в корзину
 const productAdd = Array.from(document.querySelectorAll('.product__add'))
 
+
+//нажатие на кнопку минус
 function minusQuantity (indexProduct){
     if(indexProduct >= 0){
-    if(productQuantityValue[indexProduct].textContent > 0){
+    if(productQuantityValue[indexProduct].textContent > 1){
         productQuantityValue[indexProduct].textContent--
     }
   }
 }
 
-
+//нажатие на кнопку плюс
 function plusQuantity(indexProduct){
     if(indexProduct >= 0){
     productQuantityValue[indexProduct].textContent++
@@ -31,15 +34,15 @@ function plusQuantity(indexProduct){
 }
 
 
-
-plus.forEach(itemP => itemP.addEventListener('click', function(){
+//событие нажатия на плюс
+plus.forEach(itemP => itemP.addEventListener('click', event => {
     event.preventDefault()
     indexProduct = plus.indexOf(itemP)
     plusQuantity(indexProduct)
 
 }))
 
-
+//событие нажатия на минус
 minus.forEach(item => item.addEventListener('click', function(){
     event.preventDefault()
     indexProduct = minus.indexOf(item)
@@ -47,7 +50,7 @@ minus.forEach(item => item.addEventListener('click', function(){
 
 }))
 
-
+//копирование продукта в корзину
 function copyProduct(indexProduct){
     const productCart = product[indexProduct].cloneNode(false)
     productCart.classList.add('cart__product')
@@ -65,20 +68,23 @@ function copyProduct(indexProduct){
 
 }
 
-
-productAdd.forEach(el => el.addEventListener('click', function(){
+// нажатие на кнопку добавить, перенос скопированного товара в корзину
+productAdd.forEach(el => el.addEventListener('click', event => {
     event.preventDefault()
-    //id добавленного товара
     const addProducts = Array.from(document.querySelectorAll('.cart__product'))
-    // кол-во добавленного товара
-    const cartProductCount = Array.from(document.querySelectorAll('.cart__product-count'))
     indexProduct = productAdd.indexOf(el)
-    const arrId = []
-    addProducts.forEach(elementId => arrId.push(elementId.dataset.id))
-    
-    /*if(arrId.includes(indexProduct)){
-        cartProductCount[indexProduct].textContent += 
-    }*/
-    
-    copyProduct(indexProduct)}
+    const arrAddProductId = []
+    addProducts.forEach(e => arrAddProductId.push(e.dataset.id))
+    const intArrAddProductId = arrAddProductId.map(num => parseInt(num))
+     if(intArrAddProductId.includes(indexProduct + 1)){
+        const cartProductCount = Array.from(document.querySelectorAll('.cart__product-count'))
+            cartProductCount[indexProduct].textContent = productQuantityValue[indexProduct].textContent
+    }else {
+        indexProduct = productAdd.indexOf(el)
+        const arrId = []
+        addProducts.forEach(elementId => arrId.push(elementId.dataset.id))
+        copyProduct(indexProduct)
+    }
+    }
 ))
+

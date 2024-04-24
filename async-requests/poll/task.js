@@ -18,8 +18,8 @@ xhr.open('GET', 'https://students.netoservices.ru/nestjs-backend/poll')
 xhr.send()
 
 function createElem(){
-      const option1 = JSON.stringify(window.data.answers[0])
-      const option2 = JSON.stringify(window.data.answers[1])
+      const option1 = JSON.parse(window.data.answers[0])
+      const option2 = JSON.parse(window.data.answers[1])
 
     pollAnswers.insertAdjacentHTML('afterbegin', `
     <button class="poll__answer">

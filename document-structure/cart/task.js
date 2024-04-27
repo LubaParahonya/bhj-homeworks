@@ -1,21 +1,11 @@
-
-// кнопка уменьшения
 const minus = Array.from(document.querySelectorAll('.product__quantity-control_dec'))
-//кнопка увеличения
 const plus = Array.from(document.querySelectorAll('.product__quantity-control_inc'))
-// число продуктов
 const productQuantityValue = Array.from(document.querySelectorAll('.product__quantity-value'))
-//продукт
 const product = Array.from(document.querySelectorAll('.product'))
-//фото продукта
 const productImage = Array.from(document.querySelectorAll('.product__image'))
-//корзина
 const cartProducts = document.querySelector('.cart__products')
-//кнопка добавления в корзину
 const productAdd = Array.from(document.querySelectorAll('.product__add'))
 
-
-//нажатие на кнопку минус
 function minusQuantity (indexProduct){
     if(indexProduct >= 0){
     if(productQuantityValue[indexProduct].textContent > 1){
@@ -24,7 +14,6 @@ function minusQuantity (indexProduct){
   }
 }
 
-//нажатие на кнопку плюс
 function plusQuantity(indexProduct){
     if(indexProduct >= 0){
     productQuantityValue[indexProduct].textContent++
@@ -33,8 +22,6 @@ function plusQuantity(indexProduct){
 }
 }
 
-
-//событие нажатия на плюс
 plus.forEach(itemP => itemP.addEventListener('click', event => {
     event.preventDefault()
     indexProduct = plus.indexOf(itemP)
@@ -42,16 +29,14 @@ plus.forEach(itemP => itemP.addEventListener('click', event => {
 
 }))
 
-//событие нажатия на минус
-minus.forEach(item => item.addEventListener('click', function(){
+minus.forEach(item => item.addEventListener('click', event => {
     event.preventDefault()
     indexProduct = minus.indexOf(item)
     minusQuantity(indexProduct)
 
 }))
 
-//копирование продукта в корзину
-function copyProduct(indexProduct){
+/*function copyProduct(indexProduct){
     const productCart = product[indexProduct].cloneNode(false)
     productCart.classList.add('cart__product')
     productCart.classList.remove('product')
@@ -61,30 +46,52 @@ function copyProduct(indexProduct){
     const valueCart = productQuantityValue[indexProduct].cloneNode(false)
     valueCart.classList.add('cart__product-count')
     valueCart.classList.remove('product__quantity-value')
+
     valueCart.textContent = productQuantityValue[indexProduct].textContent
     cartProducts.appendChild(productCart)
     productCart.appendChild(photoCart)
     productCart.appendChild(valueCart)
 
+}*/
+
+function copyProduct(indexProduct){
+    cartProducts.insertAdjacentHTML('afterbegin', `
+    <div class="cart__product">
+                <img class="cart__product-image">
+                <div class="cart__product-count"></div>
+            </div>`)
+    const cartProduct = document.querySelector('.cart__product')
+    cartProduct.dataset.id = product[indexProduct].dataset.id
+    const cartProductImage = document.querySelector('.cart__product-image')
+    cartProductImage.src = productImage[indexProduct].src
+    const cartProductCount = document.querySelector('.cart__product-count')
+    cartProductCount.textContent = productQuantityValue[indexProduct].textContent
+
 }
 
-// нажатие на кнопку добавить, перенос скопированного товара в корзину
+function getAddProducts(){
+    return addProducts = Array.from(document.querySelectorAll('.cart__product'))
+
+}
+
+function getCartProductCount(){
+    return cartProductCount  = Array.from(document.querySelectorAll('.cart__product-count'))
+}
+ 
 productAdd.forEach(el => el.addEventListener('click', event => {
-    event.preventDefault()
-    const addProducts = Array.from(document.querySelectorAll('.cart__product'))
-    indexProduct = productAdd.indexOf(el)
-    const arrAddProductId = []
-    addProducts.forEach(e => arrAddProductId.push(e.dataset.id))
-    const intArrAddProductId = arrAddProductId.map(num => parseInt(num))
-     if(intArrAddProductId.includes(indexProduct + 1)){
-        const cartProductCount = Array.from(document.querySelectorAll('.cart__product-count'))
-            cartProductCount[indexProduct].textContent = productQuantityValue[indexProduct].textContent
-    }else {
         indexProduct = productAdd.indexOf(el)
-        const arrId = []
-        addProducts.forEach(elementId => arrId.push(elementId.dataset.id))
-        copyProduct(indexProduct)
-    }
+        getAddProducts()
+        getCartProductCount()
+        if(addProducts.find(item => item.dataset.id === el.closest('.product').dataset.id)){
+            index = addProducts.findIndex(e => e.dataset.id ===  el.closest('.product').dataset.id)
+            cartProductCount[index].textContent = productQuantityValue[indexProduct].textContent
+
+
+        }else{
+            copyProduct(indexProduct)
+            getAddProducts()
+        }
     }
 ))
+
 

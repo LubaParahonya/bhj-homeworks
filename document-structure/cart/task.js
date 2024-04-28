@@ -36,24 +36,6 @@ minus.forEach(item => item.addEventListener('click', event => {
 
 }))
 
-/*function copyProduct(indexProduct){
-    const productCart = product[indexProduct].cloneNode(false)
-    productCart.classList.add('cart__product')
-    productCart.classList.remove('product')
-    const photoCart = productImage[indexProduct].cloneNode(false)
-    photoCart.classList.add('cart__product-image')
-    photoCart.classList.remove('product__image')
-    const valueCart = productQuantityValue[indexProduct].cloneNode(false)
-    valueCart.classList.add('cart__product-count')
-    valueCart.classList.remove('product__quantity-value')
-
-    valueCart.textContent = productQuantityValue[indexProduct].textContent
-    cartProducts.appendChild(productCart)
-    productCart.appendChild(photoCart)
-    productCart.appendChild(valueCart)
-
-}*/
-
 function copyProduct(indexProduct){
     cartProducts.insertAdjacentHTML('afterbegin', `
     <div class="cart__product">

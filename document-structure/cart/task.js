@@ -65,7 +65,7 @@ function copyProduct(indexProduct){
     const cartProductImage = document.querySelector('.cart__product-image')
     cartProductImage.src = productImage[indexProduct].src
     const cartProductCount = document.querySelector('.cart__product-count')
-    cartProductCount.textContent = productQuantityValue[indexProduct].textContent
+    cartProductCount.textContent =  productQuantityValue[indexProduct].textContent
 
 }
 
@@ -84,7 +84,7 @@ productAdd.forEach(el => el.addEventListener('click', event => {
         getCartProductCount()
         if(addProducts.find(item => item.dataset.id === el.closest('.product').dataset.id)){
             index = addProducts.findIndex(e => e.dataset.id ===  el.closest('.product').dataset.id)
-            cartProductCount[index].textContent = productQuantityValue[indexProduct].textContent
+            cartProductCount[index].textContent = (parseInt(cartProductCount[index].textContent) + parseInt(productQuantityValue[indexProduct].textContent)).toString()
 
 
         }else{

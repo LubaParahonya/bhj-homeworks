@@ -2,14 +2,11 @@ const tasksAdd = document.querySelector('.tasks__add')
 const tasksList = document.querySelector('.tasks__list')
 const tasksInput = document.querySelector('.tasks__input')
 
-
-
 function create(){
-  const inputValue = tasksInput.value.trim()
     tasksList.insertAdjacentHTML('afterbegin', `
 <div class="task">
   <div class="task__title">
-    ${inputValue}
+    ${tasksInput.value.trim()}
   </div>
   <a href="#" class="task__remove">&times;</a>
 </div>
@@ -18,18 +15,12 @@ function create(){
 }
 
 tasksAdd.addEventListener('click', event => {
-  if(tasksInput.value !== ''){
-    event.preventDefault()
+  event.preventDefault()
+  if(tasksInput.value.trim() !== ''){
     create()  
-    getArray()
     tasksInput.value = ''
   }
 })
-
-function getArray(){
-      return taskMain = Array.from(document.querySelectorAll('.task'))
-}
-
 
 tasksList.addEventListener('click', event =>{
          event.preventDefault()
@@ -38,7 +29,6 @@ tasksList.addEventListener('click', event =>{
 })
 
     
-
 
 
 

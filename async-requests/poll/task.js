@@ -1,38 +1,35 @@
 const xhr = new XMLHttpRequest()
 const pollTitle = document.querySelector('.poll__title')
 const pollAnswers = document.getElementById('poll__answers')
-let answer 
+
 
 xhr.addEventListener('readystatechange', () =>{
     if(xhr.readyState === xhr.DONE){
-      createElem()
-      answer = Array.from(document.querySelectorAll('.poll__answer'))  
-      answer.forEach(el => el.addEventListener('click', event =>{
+      pollTitle.textContent = JSON.parse(xhr.responseText)['data']['title']
+      const answers = JSON.parse(xhr.responseText)['data']['answers']
+      for(let answer in answers){
+        pollAnswers.insertAdjacentHTML('afterbegin', `
+    <button class="poll__answer">
+              ${answers[answer]}
+            </button>
+    `)
+      }
+      function getArray(){
+         btn = Array.from(document.querySelectorAll('.poll__answer'))
+        return btn
+      }
+      getArray()
+      btn.forEach(element => element.addEventListener('click', event => {
         event.preventDefault()
-        alert('Спасибо, ваш голос засчитан')
-      }))    
+        alert('Спасибо, ваш голос засчитан!')
+      }))
     }
 })
 
 xhr.open('GET', 'https://students.netoservices.ru/nestjs-backend/poll')
 xhr.send()
 
-function createElem(){
-      const option1 = JSON.parse(window.data.answers[0])
-      const option2 = JSON.parse(window.data.answers[1])
 
-    pollAnswers.insertAdjacentHTML('afterbegin', `
-    <button class="poll__answer">
-              ${option1}
-            </button>
-            <button class="poll__answer">
-            ${option2}
-            </button>
-    `)
-
-    pollTitle.textContent = JSON.stringify(window.data.title)
-
-}
 
 
 

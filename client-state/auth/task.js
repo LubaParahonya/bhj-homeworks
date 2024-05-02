@@ -4,24 +4,31 @@ const welcome = document.querySelector('.welcome ')
 const userId = document.getElementById('user_id')
 const login = document.getElementsByName('login')
 const password = document.getElementsByName('login')
-const idTrue = localStorage.getItem('userID')
+const idTrue = localStorage.getItem('idTrue')
+const signin = document.getElementById('signin')
+
+function removeSignin(){
+    signin.classList.remove('signin_active')
+}
 
 
 if(idTrue){
     welcome.classList.add('welcome_active')
     userId.textContent = idTrue
+    removeSignin()
 }
 
 document.forms[0].addEventListener('submit', event =>{
     event.preventDefault()
     const xhr = new XMLHttpRequest()
-    xhr.addEventListener('load', ()=>{
-        xhr.responseType = 'json' 
-        const response = xhr.responseText
-        if(response['success']){
+    xhr.responseType = 'json'
+    xhr.addEventListener('load', ()=>{ 
+        const response = xhr.response
+        if(response.success){
             welcome.classList.add('welcome_active')
-            localStorage.setItem('idTrue', response['user_id'] )
-            userId.textContent = response['user_id']
+            localStorage.setItem('idTrue', response.user_id)
+            userId.textContent = response.user_id
+            removeSignin()
 
         }else{
             alert('Неверный логин/пароль')

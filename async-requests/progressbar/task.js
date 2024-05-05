@@ -1,18 +1,13 @@
 const send = document.getElementById('send');
 const inputFile = document.getElementById('file')
+const progress = document.getElementById( 'progress' );
 
   send.addEventListener('click', event => {
     event.preventDefault();
     const xhr = new XMLHttpRequest();
-    xhr.upload.onprogress = () =>{
-      let i = 0
-      const progress = document.getElementById( 'progress' );
-        setInterval(() => {
-          if(i < 1){
-            i += 0.1
-            progress.value = i
-          }
-      }, 100)
+    xhr.upload.onprogress = (event) =>{
+      progress.value = event.loaded / event.total
+
     }
     
     xhr.open('POST', 'https://students.netoservices.ru/nestjs-backend/upload')
